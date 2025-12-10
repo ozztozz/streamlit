@@ -1,0 +1,5 @@
+Driver,Position,Type,Rent,Return,rate/M,rate/W,rate/D,M,W,D,T,VLF (.50/day),Base Total,Concession Fee (11.11%),Facility Fee ($5/day),TAX 17.95%,Total
+Jane Doe,Director,Med Sedan,9/13,9/17,640.00,160.00,21.33,0,0,4,4,2.00,85.32,0.00,0.00,15.67,102.99
+Jack Frost,Ager/Dyer,Medium Sedan,5-Aug,15-Dec,640.00,160.00,21.33,4,0,12,132,66.00,2815.96,0.00,0.00,517.31,3399.27
+Santa Claus,Art Director Asst,Medium Sedan,13-Aug,19-Sep,640.00,160.00,21.33,1,0,7,37,18.50,789.31,89.79,185.00,194.33,1276.92
+Rudolph Reindeer,Art Director Asst,Medium Sedan,13-Aug,8-Oct,640.00,160.00,21.33,1,0,26,56,28.00,1194.58,135.89,280.00,294.11,1932.58

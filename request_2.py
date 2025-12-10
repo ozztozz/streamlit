@@ -1,12 +1,16 @@
 import streamlit as st
 import pandas as pd
-df = pd.read_csv('mov.csv')
+mov = pd.read_csv('mov.csv')
+cars = pd.read_csv('cars.csv')
+hotel = pd.read_csv('hotel.csv')
 
 
 
 
 
 st.header('Traveler List')
-
-
-df
+mov
+st.header('Rental Car')
+cars
+st.header('Hotel')
+hotel

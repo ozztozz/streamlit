@@ -1,0 +1,6 @@
+Hotel,Conf #,Last Name,First Name,Dept,Position,IN,OUT,# of Nights,Rate per Night,Subtotal,Tax 15.25%,Parking,Total Cost,Notes
+Le Meridien,95235188,Doe,Jane,Cast,"Cast # 3 'JOYCE'",8-Oct,15-Oct,7,169.00,1183.00,180.39,-,1363.39,
+Le Meridien,86013015,Doe,Jane,Cast,"Cast # 3 'JOYCE'",3-Nov,9-Nov,6,169.00,1014.00,154.62,-,1168.62,
+Le Meridien,82034056,Smith,Jessica,Cast,"Cast # 5 'SHERRY'",6-Nov,8-Nov,2,169.00,338.00,51.54,-,389.54,
+Le Meridien,92861550,Willis,Jack,Cast,"Cast # 7 'JIMMY MALONEY'",12-Nov,17-Nov,5,169.00,845.00,128.85,75.00,1048.85,
+Le Meridien,72313419,Garcia,Rose,EPK,EPK,14-Nov,16-Nov,2,169.00,338.00,51.54,-,389.54,
