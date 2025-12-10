@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-df = pd.read_csv('request/mov.csv')
+df = pd.read_csv('mov.csv')
 
 
 
