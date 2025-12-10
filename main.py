@@ -1,5 +1,6 @@
 import streamlit as st
 import sqlite3
+import pandas as pd
 
 def init_db():
     conn=sqlite3.connect('names.db')
@@ -59,6 +60,8 @@ st.title('Search Names')
 query=st.text_input('Enter Name')
 if query:
     results=search_name(query)
+    data=pd.DataFrame(results)
+    data.to_excel('data.xlsx')
     for row in results:
         st.write(f'{row[0]}. {row[1]} ')
 
@@ -87,4 +90,11 @@ st.title('Saved Names')
 st.subheader('Name List')
 for row in names:
     st.write(f'{row[0]}. {row[1]}')
+
+import os
+files=[file for file in os.listdir()]
+st.title('files to show')
+st.subheader('File List')
+for row in files:
+    st.write(f'{row}')
 
