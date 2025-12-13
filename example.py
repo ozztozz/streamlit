@@ -1,4 +1,3 @@
-import logging
 from datetime import datetime
 from pathlib import Path
 
@@ -7,18 +6,6 @@ import streamlit as st
 from models import Base, Task, User
 from streamlit_sqlalchemy import StreamlitAlchemyMixin
 
-
-@st.cache_resource
-def _configure_logging():
-    class StreamlitHandler(logging.Handler):
-        def emit(self, record):
-            log_entry = self.format(record)
-            st.toast(log_entry)
-
-    logger = logging.getLogger()
-    if not any(isinstance(h, StreamlitHandler) for h in logger.handlers):
-        logger.addHandler(StreamlitHandler())
-    logger.setLevel(logging.INFO)
 
 
 def _display_inline():
@@ -45,7 +32,7 @@ def _display_inline():
 def show_single_task(task):
     col1, col2, col3 = st.columns([1, 1, 1])
     if task.done:
-        col1.write(f" - ~~{task.description}~~")
+        col1.write(f" - ~~{task.task}~~")
         with col2:
             task.st_delete_button()
     else:
@@ -61,25 +48,25 @@ def show_single_task(task):
         with col3:
             task.st_delete_button()
 
-
+def user_info(user):
+    st.session_state.ogrenci=user.id
+               
 def app():
-    st.title("Streamlit SQLAlchemy Demo")
+    
+    with CONNECTION.session as db_session:
+        for user in db_session.query(User).all():
+            with st.sidebar:
+               
+                st.button(user.name,key=user.id,on_click=user_info,args=[user])
+                
 
-    User.st_crud_tabs()
+@st.dialog("Ders Ekle")
+def add_task(user_id):
+    form_ders=Task.st_create_form(defaults={"user_id":user_id, "done": False,'hata':0})
+    if form_ders:
+        st.rerun()
 
-    with CONNECTION.session as session:
-        for user in session.query(User).all():
-            with st.expander(f"### {user.name}'s tasks:"):
-                c = st.container()
-
-                st.write("**Add a new task:**")
-                Task.st_create_form(defaults={"user_id": user.id, "done": False})
-                with c:
-                    if not user.tasks:
-                        st.caption("No tasks yet.")
-
-                    for task in user.tasks:
-                        show_single_task(task)
+                        
 
 
 def main():
@@ -88,12 +75,33 @@ def main():
 
     # initialize the StreamlitAlchemyMixin
     StreamlitAlchemyMixin.st_initialize(connection=CONNECTION)
+    if 'ogrenci'not in st.session_state:
+        st.session_state.ogrenci=None
+        st.title('Ogrenci Seciniz')
+
+    if st.session_state.ogrenci:
+        user_id=st.session_state.ogrenci
+        if st.button('Ders Ekle'):
+            add_task(user_id)
+        user=CONNECTION.session.query(User).get(user_id)
+        st.subheader(f'{user.name} Program')
+        #Task.st_create_form(defaults={"user_id":user_id, "done": False})
+        c = st.container()
+
+        with c:
+            if not user.tasks:
+                st.caption("No tasks yet.")
+
+            for task in user.tasks:
+                show_single_task(task)
+
+    
 
     # make the columns inline
     _display_inline()
 
     # use the logs as toasts in the app
-    _configure_logging()
+    #_configure_logging()
 
     # the actual app
     app()
